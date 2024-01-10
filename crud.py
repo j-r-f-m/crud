@@ -23,3 +23,16 @@ for sheet in sheet_collector:
 
 
 t.Commit()                                      # commit the transaction
+
+
+wall_id_collector = FilteredElementCollector(doc).OfCategory(
+    BuiltInCategory.OST_Walls).WhereElementIsNotElementType().ToElementIds()
+
+# initiate a transaction to modify the model
+t = Transaction(doc, 'Deleting all walls')     # instantiate a transaction
+t.Start()
+
+for wall_id in wall_id_collector:
+    doc.Delete(wall_id)
+
+t.Commit()                                      # commit the transaction
